@@ -1,34 +1,41 @@
-# train-route-network
+*Install JDK (JDK8 recommended)
+*Install sbt (https://www.scala-sbt.org/1.0/docs/Setup.html)
+*On Windows – 
+	*Ensure java is set in the path
+	*Ensure sbt is set in the path 
+	*cd <to the Project folder>
+	*run sbt 
+	*Within sbt environment, run the following - 
+		*clean
+		*compile
+		*run <arguments>
+	*About <arguments> 
+		*arg[0] represents the stations. For the given problem, ABCDE are the stations.
+		*arg[1] represents the routes. For the given problem, AB5,BC4,CD8,DC8,DE6,AD5,CE2,EB3,AE7 are the routes.
+		*arg[2] represents the expression according to a problem statement. 
+	*Details of arg[2] - It follows the following format - <ProblemType>_<Path>-<LimitType>-<LimitValue>
+		*ProblemType - The program categorises the problems into 3 types. Possible values for ProblemType are Distance , AllRoutes and ShortestDistance.
+			*Distance – Represents the problem to compute distance between the given path.
+			*AllRoutes – Represents the problem to compute all possible routes between the given pair of stations.
+			*ShortestDistance - Represents the problem to compute the shortest distance between the given pair of stations.
+		*Path – Represents the path. Hyphen/Minus (-) is used as the delimiter.
+		*LimitType – Possible values are Hops, Exact, and Distance.
+		*LimitValue – Represent the value used by LimitType to limit the conditionals.
 
-The local commuter railroad services a number of towns in Kiwiland.  Because of monetary concerns, all of the tracks are 'one-way.'  That is, a route from Kaitaia to Invercargill does not imply the existence of a route from Invercargill to Kaitaia.  In fact, even if both of these routes do happen to exist, they are distinct and are not necessarily the same distance!
- 
-The purpose of this problem is to help the railroad provide its customers with information about the routes.  In particular, you will compute the distance along a certain route, the number of different routes between two towns, and the shortest route between two towns.
- 
-Input:  A directed graph where a node represents a town and an edge represents a route between two towns.  The weighting of the edge represents the distance between the two towns.  A given route will never appear more than once, and for a given route, the starting and ending town will not be the same town.
- 
-Output: For test input 1 through 5, if no such route exists, output 'NO SUCH ROUTE'.  Otherwise, follow the route as given; do not make any extra stops!  For example, the first problem means to start at city A, then travel directly to city B (a distance of 5), then directly to city C (a distance of 4).
-The distance of the route A-B-C.
-The distance of the route A-D.
-The distance of the route A-D-C.
-The distance of the route A-E-B-C-D.
-The distance of the route A-E-D.
-The number of trips starting at C and ending at C with a maximum of 3 stops.  In the sample data below, there are two such trips: C-D-C (2 stops). and C-E-B-C (3 stops).
-The number of trips starting at A and ending at C with exactly 4 stops.  In the sample data below, there are three such trips: A to C (via B,C,D); A to C (via D,C,D); and A to C (via D,E,B).
-The length of the shortest route (in terms of distance to travel) from A to C.
-The length of the shortest route (in terms of distance to travel) from B to B.
-The number of different routes from C to C with a distance of less than 30.  In the sample data, the trips are: CDC, CEBC, CEBCDC, CDCEBC, CDEBC, CEBCEBC, CEBCEBCEBC.
- 
-Test Input:
-For the test input, the towns are named using the first few letters of the alphabet from A to D.  A route between two towns (A to B) with a distance of 5 is represented as AB5.
-Graph: AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7
-Expected Output:
-Output #1: 9
-Output #2: 5
-Output #3: 13
-Output #4: 22
-Output #5: NO SUCH ROUTE
-Output #6: 2
-Output #7: 3
-Output #8: 9
-Output #9: 9
-Output #10: 7
+*List of arguments for the given set of problems –
+<graph> = ABCDE AB5,BC4,CD8,DC8,DE6,AD5,CE2,EB3,AE7
+Problem	 | Program Arguments  | Result
+The distance of the route A-B-C. 	 |<graph> Distance_ A-B-C	 |9
+The distance of the route A-D	 |<graph> Distance_A-D	 |5
+The distance of the route A-D-C	 |<graph> Distance_A-D-C	 |13
+The distance of the route A-E-B-C-D	 |<graph> Distance_ A-E-B-C-D	 |22
+The distance of the route A-E-D	 |<graph> Distance_ A-E-D	 |NO such route for A-E-D
+0
+The number of trips starting at C and ending at C with a maximum of 3 stops.  In the sample data below, there are two such trips: C-D-C (2 stops). and C-E-B-C (3 stops)	 |<graph> AllRoutes_C-C-Hops-3	 |2
+The number of trips starting at A and ending at C with exactly 4 stops.  In the sample data below, there are three such trips: A to C (via B,C,D); A to C (via D,C,D); and A to C (via D,E,B).	 |<graph> AllRoutes_A-C-Exact-5	 |3
+The length of the shortest route (in terms of distance to travel) from A to C.	 |<graph> ShortestDistance_A-C	 |9
+The length of the shortest route (in terms of distance to travel) from B to B	 |<graph> ShortestDistance_B-B	 |9
+The number of different routes from C to C with a distance of less than 30.  In the sample data, the trips are: CDC, CEBC, CEBCDC, CDCEBC, CDEBC, CEBCEBC, CEBCEBCEBC	 |<graph> AllRoutes_C-C-Distance-30	 |7
+
+
+
